@@ -762,6 +762,10 @@ var commonInitialisms = map[string]bool{
 // It complains if they are missing from an exported type,
 // or if they are not of the standard form.
 func (f *file) lintTypeDoc(t *ast.TypeSpec, doc *ast.CommentGroup) {
+
+	// Ignore comment warnings.
+	return
+
 	if !ast.IsExported(t.Name.Name) {
 		return
 	}
@@ -795,6 +799,10 @@ var commonMethods = map[string]bool{
 // It complains if they are missing, or not of the right form.
 // It has specific exclusions for well-known methods (see commonMethods above).
 func (f *file) lintFuncDoc(fn *ast.FuncDecl) {
+
+	// Ignore comment warnings.
+	return
+
 	if !ast.IsExported(fn.Name.Name) {
 		// func is unexported
 		return
@@ -855,6 +863,9 @@ func (f *file) lintValueSpecDoc(vs *ast.ValueSpec, gd *ast.GenDecl, genDeclMissi
 	if !ast.IsExported(name) {
 		return
 	}
+
+	// Ignore comment warnings.
+	return
 
 	if vs.Doc == nil && gd.Doc == nil {
 		if genDeclMissingComments[gd] {
